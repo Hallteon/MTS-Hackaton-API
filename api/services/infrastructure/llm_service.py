@@ -10,6 +10,6 @@ class LLModelService:
         if not self.model:
             self.model = LLModel()
 
-        llm_answer = await self.model.predict(prompt)
+        llm_answer = await self.model.predict(prompt=prompt, context=self.context)
 
         return llm_answer
