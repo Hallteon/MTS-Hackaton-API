@@ -1,15 +1,65 @@
-# MTS Hackathon API 👁️🗺️
+# MTS Hackathon API 👁🗺
 
-A robust Python backend API developed for the **MTS Hackathon**. This service powers an inclusive navigation application designed to assist visually impaired and blind people in exploring and navigating urban environments safely and independently.
+Робастный бэкенд-сервис (API) на Python, разработанный в рамках **MTS Hackathon**. Этот сервис является ядром инклюзивного навигационного приложения, созданного для помощи незрячим и слабовидящим людям в безопасном и независимом ориентировании в городской среде.
 
-## 🚀 Key Features
+## 🚀 Основные возможности
 
-* **AI-Powered Assistance:** Integration with Large Language Models (LLM) and Vision-Language Models (VLM), including `Qwen-7B-Instruct`, to interpret spatial data and visual contexts.
-* **Inclusive Routing:** Specialized API endpoints for parsing accessible routes, avoiding hazardous city zones, and generating clear environmental context.
-* **Production-Ready Core:** Modular architecture with robust configuration validation (`configs_validator.py`), custom logging (`log_config.yaml`), and asynchronous web processing.
+* **ИИ-ассистент (AI-Powered Assistance):** Интеграция с большими языковыми моделями (LLM) и мультимодальными моделями компьютерного зрения (VLM), включая `Qwen-7B-Instruct`, для интерпретации пространственных данных и визуального контекста окружения.
+* **Инклюзивная маршрутизация:** Специализированные эндпоинты для построения доступных маршрутов, обхода опасных городских зон и генерации понятных голосовых/текстовых описаний локаций.
+* **Готовность к продакшену:** Модульная архитектура с автоматической валидацией конфигураций (`configs_validator.py`), кастомным логированием (`log_config.yaml`) и асинхронной обработкой запросов.
 
-## 🛠️ Tech Stack
+## 🛠 Технологический стек
 
-* **Language:** Python 100%
-* **AI Models:** Qwen-7B-Instruct / Vision-Language Models (VLM)
-* **Web Framework:** FastAPI / Starlette *(исходя из структуры проекта)*
+* **Язык разработки:** Python (FastAPI / Starlette)
+* **Нейросети и ИИ:** Qwen-7B-Instruct / Vision-Language Models (VLM)
+* **Конфигурация:** PyYAML / Pydantic (для валидации настроек)
+
+## 📁 Структура проекта
+
+```text
+├── api/                    # Эндпоинты, роуты и бизнес-логика API (FastAPI)
+├── utils/                  # Вспомогательные скрипты, интеграция с LLM/VLM моделями
+├── .gitignore              # Исключения для Git
+├── README.md               # Документация проекта
+├── configs_validator.py    # Скрипт автоматической проверки валидности конфигураций
+├── log_config.yaml         # Настройки логирования (конфигурация логов)
+├── main.py                 # Главная точка входа для запуска API-сервера
+├── requirements.txt        # Список зависимостей проекта
+├── settings.py             # Глобальные настройки приложения и управление env-переменными
+└── web_setup.py            # Конфигурация веб-сервера, CORS и промежуточного ПО (Middleware)
+```
+
+## ⚙️ Быстрый запуск
+
+### 1. Клонирование репозитория
+```bash
+git clone https://github.com
+cd MTS-Hackaton-API
+```
+
+### 2. Настройка виртуального окружения
+Создайте и активируйте окружение, затем установите зависимости:
+```bash
+python -m venv venv
+source venv/bin/activate  # Для Linux/macOS
+# или
+venv\Scripts\activate     # Для Windows
+
+pip install -r requirements.txt
+```
+
+### 3. Настройка переменных окружения (`.env`)
+Для работы интеграций с LLM/VLM моделями создайте файл `.env` в корневой директории и укажите необходимые ключи доступа (параметры подгружаются через `settings.py`):
+```env
+# Пример (настройте под ваши требования)
+LLM_API_KEY=your_api_key_here
+MODEL_NAME=Qwen-7B-Instruct
+DEBUG=True
+```
+
+### 4. Запуск приложения
+Запустите основной скрипт бэкенда:
+```bash
+python main.py
+```
+После успешного запуска интерактивная документация API (Swagger/ReDoc) развернется по адресу: `http://127.0.0`.
